@@ -431,7 +431,7 @@
   <ellipse cx="34" cy="67" rx="5.5" ry="3" fill="#2E3B38"/>
   <ellipse cx="66" cy="67" rx="5.5" ry="3" fill="#2E3B38"/>
 </g>
-<text x="260" y="88" text-anchor="middle" font-family="-apple-system,'Segoe UI',Arial,sans-serif" font-size="8.5" letter-spacing="1.8" fill="#A8C4BF" opacity="0.5">THE LONG BREATH · BY NEIL PEACOCK</text>
+<text x="260" y="88" text-anchor="middle" font-family="'Liberation Sans','Open Sans',Arial,sans-serif" font-size="8.5" letter-spacing="1.8" fill="#A8C4BF" opacity="0.5">THE LONG BREATH · BY NEIL PEACOCK</text>
 <!-- PLANETS -->
 <circle cx="72"  cy="148" r="4.5" fill="#E8CC7A" opacity=".28"/>
 <circle cx="72"  cy="148" r="3"   fill="#CDA278" opacity=".20"/>

@@ -80,7 +80,7 @@
   <ellipse cx="34" cy="67" rx="5.5" ry="3" fill="#2E3B38"/>
   <ellipse cx="66" cy="67" rx="5.5" ry="3" fill="#2E3B38"/>
 </g>
-<text x="260" y="88" text-anchor="middle" font-family="-apple-system,'Segoe UI',Arial,sans-serif" font-size="8.5" letter-spacing="1.8" fill="#A8C4BF" opacity="0.5">THE LONG BREATH · BY NEIL PEACOCK</text>
+<text x="260" y="88" text-anchor="middle" font-family="'Liberation Sans','Open Sans',Arial,sans-serif" font-size="8.5" letter-spacing="1.8" fill="#A8C4BF" opacity="0.5">THE LONG BREATH · BY NEIL PEACOCK</text>
 <!-- DISTANT MOUNTAINS -->
 <path d="M-10 270 L38 205 C42 199,46 199,50 205 L90 270Z" fill="#5E7872" opacity=".20"/>
 <path d="M70 270 L118 190 C122 183,128 183,132 190 L180 270Z" fill="#5E7872" opacity=".18"/>
