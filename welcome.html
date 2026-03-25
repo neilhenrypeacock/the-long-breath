@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Welcome — The Long Breath</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    color:#FCFAF7;
+    font-family:'EB Garamond',Georgia,serif;
+    -webkit-font-smoothing:antialiased;
+    max-width:480px;
+    margin:0 auto;
+    background-color:#2E3B38;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='480' height='900'%3E%3Ccircle cx='22' cy='9' r='1.4' fill='%23F3F1EC' opacity='0.88'/%3E%3Ccircle cx='68' cy='15' r='0.9' fill='%23E0DED6' opacity='0.78'/%3E%3Ccircle cx='124' cy='7' r='1.6' fill='%23F3F1EC' opacity='0.92'/%3E%3Ccircle cx='180' cy='20' r='0.9' fill='%23E0DED6' opacity='0.74'/%3E%3Ccircle cx='236' cy='10' r='1.3' fill='%23F3F1EC' opacity='0.84'/%3E%3Ccircle cx='292' cy='6' r='1.1' fill='%23E0DED6' opacity='0.80'/%3E%3Ccircle cx='348' cy='17' r='1.5' fill='%23F3F1EC' opacity='0.88'/%3E%3Ccircle cx='403' cy='8' r='1.0' fill='%23E0DED6' opacity='0.75'/%3E%3Ccircle cx='458' cy='21' r='1.2' fill='%23F3F1EC' opacity='0.82'/%3E%3Ccircle cx='44' cy='56' r='1.0' fill='%23F3F1EC' opacity='0.70'/%3E%3Ccircle cx='98' cy='65' r='0.8' fill='%23E0DED6' opacity='0.62'/%3E%3Ccircle cx='154' cy='51' r='1.1' fill='%23F3F1EC' opacity='0.72'/%3E%3Ccircle cx='210' cy='69' r='0.8' fill='%23E0DED6' opacity='0.58'/%3E%3Ccircle cx='264' cy='58' r='1.0' fill='%23F3F1EC' opacity='0.66'/%3E%3Ccircle cx='320' cy='47' r='0.9' fill='%23E0DED6' opacity='0.63'/%3E%3Ccircle cx='376' cy='67' r='1.1' fill='%23F3F1EC' opacity='0.70'/%3E%3Ccircle cx='430' cy='55' r='0.9' fill='%23E0DED6' opacity='0.60'/%3E%3Ccircle cx='36' cy='116' r='1.0' fill='%23E0DED6' opacity='0.55'/%3E%3Ccircle cx='88' cy='126' r='0.8' fill='%23F3F1EC' opacity='0.47'/%3E%3Ccircle cx='144' cy='112' r='1.0' fill='%23E0DED6' opacity='0.57'/%3E%3Ccircle cx='200' cy='130' r='0.8' fill='%23F3F1EC' opacity='0.48'/%3E%3Ccircle cx='254' cy='120' r='0.9' fill='%23E0DED6' opacity='0.52'/%3E%3Ccircle cx='310' cy='109' r='0.8' fill='%23F3F1EC' opacity='0.50'/%3E%3Ccircle cx='364' cy='128' r='1.0' fill='%23E0DED6' opacity='0.53'/%3E%3Ccircle cx='418' cy='116' r='0.8' fill='%23F3F1EC' opacity='0.46'/%3E%3Ccircle cx='44' cy='178' r='1.0' fill='%23F3F1EC' opacity='0.42'/%3E%3Ccircle cx='178' cy='175' r='0.9' fill='%23F3F1EC' opacity='0.35'/%3E%3Ccircle cx='310' cy='180' r='0.9' fill='%23F3F1EC' opacity='0.30'/%3E%3Ccircle cx='442' cy='186' r='0.9' fill='%23F3F1EC' opacity='0.28'/%3E%3Ccircle cx='120' cy='240' r='0.7' fill='%23E0DED6' opacity='0.22'/%3E%3Ccircle cx='280' cy='248' r='0.7' fill='%23F3F1EC' opacity='0.18'/%3E%3Ccircle cx='420' cy='242' r='0.6' fill='%23E0DED6' opacity='0.16'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: 480px auto;
+    background-position: top center;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 28px 48px;
+  }
+  /* Cinematic fade-ins */
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(16px) }
+    to   { opacity:1; transform:translateY(0) }
+  }
+  .logo-wrap   { animation: fadeUp 1.2s ease-out 0.3s both; margin-bottom: 36px; text-align: center; }
+  .wordmark    { font-size:11px; letter-spacing:0.18em; color:#8AAA8E; text-transform:uppercase; margin-top:12px; font-family:-apple-system,Arial,sans-serif; opacity:0.85 }
+  .wordmark-by { font-size:9px; letter-spacing:0.12em; color:#8AAA8E; opacity:0.6; font-family:-apple-system,Arial,sans-serif; text-transform:uppercase; margin-top:4px }
+  .welcome-title { animation: fadeUp 1.2s ease-out 0.8s both; font-size: clamp(26px,6vw,34px); font-style:italic; font-weight:400; color:#FCFAF7; text-align:center; line-height:1.25; margin-bottom:20px }
+  .welcome-sub  { animation: fadeUp 1.0s ease-out 1.3s both; font-size:16px; color:#A8C4BF; line-height:1.8; font-style:italic; text-align:center; max-width:360px; margin-bottom:12px }
+  .inbox-note   { animation: fadeUp 1.0s ease-out 1.7s both; font-size:13px; color:#5E7872; font-family:-apple-system,Arial,sans-serif; text-align:center; letter-spacing:0.02em; margin-bottom:52px }
+  /* Mantra card */
+  .mantra-card  { animation: fadeUp 1.2s ease-out 2.1s both; background:#3D5C58; border-radius:8px; padding:28px; max-width:380px; width:100%; text-align:center; margin-bottom:40px }
+  .mantra-label { font-size:9px; letter-spacing:0.16em; text-transform:uppercase; color:#8AAA8E; font-family:-apple-system,Arial,sans-serif; margin-bottom:14px; display:block }
+  .mantra-sanskrit { font-size:22px; font-style:italic; color:#F3F1EC; line-height:1.35; margin-bottom:8px }
+  .mantra-phonetic { font-size:11px; color:#A8C4BF; font-family:-apple-system,Arial,sans-serif; letter-spacing:0.04em; margin-bottom:12px }
+  .mantra-translation { font-size:14px; color:#E0DED6; line-height:1.65; margin-bottom:10px }
+  .mantra-context { font-size:12px; color:#A8C4BF; line-height:1.6; max-width:300px; margin:0 auto }
+  /* Footer */
+  .page-footer  { animation: fadeUp 1.0s ease-out 2.5s both; text-align:center }
+  .page-footer img { width:56px; height:56px; border-radius:50%; object-fit:cover; object-position:center top; border:1.5px solid #5E7872; display:block; margin:0 auto 10px }
+  .page-footer-name { font-size:14px; color:#FCFAF7; margin-bottom:4px }
+  .page-footer-bio  { font-size:11px; color:#5E7872; font-style:italic; font-family:-apple-system,Arial,sans-serif; line-height:1.5 }
+  /* Moon and planets — fade in then drift slowly */
+  @keyframes celestialIn { from{opacity:0} to{opacity:1} }
+  @keyframes moonDrift    { 0%{transform:translate(0,0)}   50%{transform:translate(-8px,-5px)}  100%{transform:translate(0,0)} }
+  @keyframes planet1Drift { 0%{transform:translate(0,0)}   50%{transform:translate(6px,-8px)}   100%{transform:translate(0,0)} }
+  @keyframes planet2Drift { 0%{transform:translate(0,0)}   50%{transform:translate(-5px,7px)}   100%{transform:translate(0,0)} }
+  @keyframes planet3Drift { 0%{transform:translate(0,0)}   50%{transform:translate(7px,-4px)}   100%{transform:translate(0,0)} }
+  #celestial { animation: celestialIn 4s ease-out 0.4s both; pointer-events:none; position:fixed; top:0; left:50%; transform:translateX(-50%); width:480px; height:100%; z-index:0 }
+  #moon-group    { animation: moonDrift    10s ease-in-out infinite; transform-origin: 370px 90px }
+  #planet1-group { animation: planet1Drift 7.5s ease-in-out infinite; transform-origin: 82px 148px }
+  #planet2-group { animation: planet2Drift 12.5s ease-in-out infinite; transform-origin: 430px 220px }
+  #planet3-group { animation: planet3Drift 9s ease-in-out infinite; transform-origin: 38px 310px }
+</style>
+</head>
+<body>
+<!-- MOON + PLANETS: fixed background, fades in slowly then drifts -->
+<svg id="celestial" viewBox="0 0 480 700" preserveAspectRatio="xMidYMin meet">
+  <!-- Moon -->
+  <g id="moon-group">
+    <circle cx="370" cy="90" r="52" fill="#E0DED6" opacity="0.04"/>
+    <circle cx="370" cy="90" r="44" fill="#E0DED6" opacity="0.06"/>
+    <circle cx="370" cy="90" r="38" fill="#D3D1C7" opacity="0.55"/>
+    <circle cx="388" cy="84" r="34" fill="#2E3B38"/>
+    <circle cx="352" cy="102" r="4.5" fill="#2E3B38" opacity="0.18"/>
+    <circle cx="362" cy="78"  r="3.0" fill="#2E3B38" opacity="0.12"/>
+    <circle cx="345" cy="88"  r="2.0" fill="#2E3B38" opacity="0.10"/>
+  </g>
+  <!-- Planet 1 — ringed -->
+  <g id="planet1-group">
+    <ellipse cx="82" cy="148" rx="22" ry="5" fill="none" stroke="#A8C4BF" stroke-width="1.5" opacity="0.22"/>
+    <circle cx="82" cy="148" r="10" fill="#8AAA8E" opacity="0.35"/>
+    <path d="M70 148 Q82 143 94 148" fill="none" stroke="#A8C4BF" stroke-width="1.5" opacity="0.22"/>
+  </g>
+  <!-- Planet 2 — soft glow -->
+  <g id="planet2-group">
+    <circle cx="430" cy="220" r="8" fill="#A8C4BF" opacity="0.10"/>
+    <circle cx="430" cy="220" r="5" fill="#A8C4BF" opacity="0.22"/>
+    <circle cx="430" cy="220" r="3" fill="#E0DED6" opacity="0.40"/>
+  </g>
+  <!-- Planet 3 — distant dot -->
+  <g id="planet3-group">
+    <circle cx="38" cy="310" r="3"   fill="#A8C4BF" opacity="0.18"/>
+    <circle cx="38" cy="310" r="1.8" fill="#E0DED6" opacity="0.30"/>
+  </g>
+</svg>
+<!-- LOGO -->
+<div class="logo-wrap">
+  <svg width="52" height="52" viewBox="0 0 100 100" style="display:block;margin:0 auto;opacity:0.85">
+    <ellipse cx="50" cy="14" rx="12" ry="10" transform="rotate(-4 50 14)" fill="#A8C4BF"/>
+    <path d="M29 46 C29 32,37 25,43 34 C45 38,47 40,50 40 C53 40,55 38,57 34 C63 25,71 32,71 46 C71 50,67 52,63 48 C60 45,57 42,55 42" fill="#A8C4BF"/>
+    <path d="M50 57 C45 52,34 49,25 54 C17 59,16 71,22 77 C28 82,39 79,45 73 C47 70,49 66,50 63 C51 66,53 70,55 73 C61 79,72 82,78 77 C84 71,83 59,75 54 C66 49,55 52,50 57Z" fill="#A8C4BF"/>
+    <ellipse cx="34" cy="67" rx="5.5" ry="3" fill="#2E3B38"/>
+    <ellipse cx="66" cy="67" rx="5.5" ry="3" fill="#2E3B38"/>
+  </svg>
+  <div class="wordmark">The Long Breath</div>
+  <div class="wordmark-by">by Neil Peacock</div>
+</div>
+<!-- WELCOME TEXT -->
+<h1 class="welcome-title">Welcome to<br>The Long Breath.</h1>
+<p class="welcome-sub">Your first email is in your inbox.</p>
+<p class="inbox-note">Thanks for joining. Really glad you're here.</p>
+<!-- MANTRA CARD -->
+<div class="mantra-card">
+  <span class="mantra-label">Mantra</span>
+  <p class="mantra-sanskrit">Atha Yog&#257;nu&#347;&#257;sanam</p>
+  <p class="mantra-phonetic">ah-tah yo-gah-noo-shah-sah-nahm</p>
+  <p class="mantra-translation">"Now, the teaching of yoga begins."</p>
+  <p class="mantra-context">The opening line of Patanjali's Yoga Sutras. One word — atha — means "now." Not when you're ready. Not when you've read enough. Now.</p>
+</div>
+<!-- FOOTER -->
+<div class="page-footer">
+  <img src="https://image2url.com/r2/default/images/1774292119609-d15efe8a-b02a-44b0-9a9a-6130b2063c77.blob" alt="Neil Peacock">
+  <p class="page-footer-name">Neil Peacock</p>
+  <p class="page-footer-bio">Yoga teacher, runner, surfer, from the land. Not the oracle.</p>
+</div>
+</body>
+</html>
