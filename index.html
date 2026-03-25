@@ -253,19 +253,11 @@
 <div class="signup scroll-fade" id="signup-wrapper" aria-live="polite">
   <p class="signup-h">Shall we?</p>
   <p class="signup-sub">2 emails a week · 3 minute reads · jump off whenever you want.</p>
-  <!-- Hidden iframe: catches the EmailOctopus response so the page doesn't navigate away -->
-  <iframe name="eo-hidden" style="display:none" aria-hidden="true"></iframe>
-  <form class="signup-form" id="signup-form"
-    action="https://emailoctopus.com/lists/165ad7d4-26b0-11f1-a551-6775dedd6e52/members/external-add"
-    method="POST"
-    target="eo-hidden"
-    novalidate>
-    <!-- Honeypot: off-screen so humans don't see it, but not display:none so bots do -->
+  <form class="signup-form" id="signup-form" novalidate>
+    <!-- Honeypot: off-screen so humans don't see it, but not display:none so bots fill it -->
     <div style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden" aria-hidden="true">
       <input type="text" name="hp" tabindex="-1" autocomplete="off">
     </div>
-    <!-- No-JS fallback: if JS is disabled, EmailOctopus redirects here after submission -->
-    <input type="hidden" name="successRedirectUrl" value="https://neilhenrypeacock.github.io/the-long-breath/welcome.html">
     <input type="email" name="emailAddress" placeholder="your@email.com" autocomplete="email" inputmode="email">
     <button type="submit">Subscribe</button>
   </form>
@@ -344,16 +336,12 @@
     fadeObserver.observe(el);
   });
 
-  // ─── EmailOctopus form submission ─────────────────────────────────────────────
-  var form = document.getElementById('signup-form');
+  // ─── EmailOctopus API form submission ─────────────────────────────────────────
+  var form    = document.getElementById('signup-form');
   var wrapper = document.getElementById('signup-wrapper');
-  var iframe = document.querySelector('iframe[name="eo-hidden"]');
-  var successTimer;
 
   function showSuccess(){
     if(!wrapper) return;
-    // Clear the safety timer if iframe.onload fired first
-    clearTimeout(successTimer);
     wrapper.innerHTML =
       '<div class="signup-success" role="alert">' +
         '<p class="signup-success-icon">✦</p>' +
@@ -379,33 +367,53 @@
     errEl.textContent = msg;
   }
 
-  if(form && iframe){
+  if(form){
     form.addEventListener('submit', function(e){
+      e.preventDefault();
       var emailInput = form.querySelector('input[name="emailAddress"]');
       var email = emailInput ? emailInput.value.trim() : '';
+      var hp    = form.querySelector('input[name="hp"]');
 
-      // Basic client-side validation
+      // Honeypot — bail silently if a bot filled it
+      if(hp && hp.value){ showSuccess(); return; }
+
+      // Client-side validation
       if(!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
         showError('Please enter a valid email address.');
-        e.preventDefault();
         return;
       }
 
-      // Remove any previous error
       var prevErr = document.getElementById('signup-error');
       if(prevErr) prevErr.remove();
 
-      // Disable button while submitting
       var btn = form.querySelector('button[type="submit"]');
       if(btn){ btn.textContent = 'Sending\u2026'; btn.disabled = true; }
 
-      // Show success when the iframe loads (response has arrived)
-      iframe.addEventListener('load', showSuccess, { once: true });
-
-      // Safety fallback: show success after 6s even if iframe.onload doesn't fire
-      successTimer = setTimeout(showSuccess, 6000);
-
-      // Allow the form to POST normally into the iframe via target="eo-hidden"
+      // Submit via EmailOctopus API — status PENDING triggers double opt-in email
+      fetch('https://emailoctopus.com/api/1.6/lists/165ad7d4-26b0-11f1-a551-6775dedd6e52/contacts', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          api_key: 'eo_ac9bfbba9843fb0ceb60fc1b71fb5004fa085a9fc4cc10291fcf256abcfc91b3',
+          email_address: email,
+          status: 'PENDING'
+        })
+      })
+      .then(function(res){
+        return res.json().then(function(data){ return { ok: res.ok, status: res.status, data: data }; });
+      })
+      .then(function(r){
+        if(r.ok || r.status === 409){
+          // 409 = already subscribed — show success anyway (no email enumeration)
+          showSuccess();
+        } else {
+          var msg = (r.data && r.data.error && r.data.error.message) || 'Something went wrong. Please try again.';
+          showError(msg);
+        }
+      })
+      .catch(function(){
+        showError('Something went wrong. Please try again.');
+      });
     });
   }
 })();
