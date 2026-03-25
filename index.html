@@ -253,11 +253,19 @@
 <div class="signup scroll-fade" id="signup-wrapper" aria-live="polite">
   <p class="signup-h">Shall we?</p>
   <p class="signup-sub">2 emails a week · 3 minute reads · jump off whenever you want.</p>
-  <form class="signup-form" id="signup-form" novalidate>
+  <!-- Hidden iframe: form posts into this so the page never navigates away -->
+  <iframe name="eo-hidden" id="eo-hidden" style="display:none" aria-hidden="true"></iframe>
+  <form class="signup-form" id="signup-form"
+        action="https://emailoctopus.com/lists/165ad7d4-26b0-11f1-a551-6775dedd6e52/members/external-add"
+        method="POST"
+        target="eo-hidden"
+        novalidate>
     <!-- Honeypot: off-screen so humans don't see it, but not display:none so bots fill it -->
     <div style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden" aria-hidden="true">
       <input type="text" name="hp" tabindex="-1" autocomplete="off">
     </div>
+    <!-- No-JS fallback: EmailOctopus redirects here after successful submission -->
+    <input type="hidden" name="successRedirectUrl" value="https://neilhenrypeacock.github.io/the-long-breath/welcome.html">
     <input type="email" name="emailAddress" placeholder="your@email.com" autocomplete="email" inputmode="email">
     <button type="submit">Subscribe</button>
   </form>
@@ -336,7 +344,7 @@
     fadeObserver.observe(el);
   });
 
-  // ─── EmailOctopus API form submission ─────────────────────────────────────────
+  // ─── EmailOctopus form submission (hidden iframe, no backend needed) ──────────
   var form    = document.getElementById('signup-form');
   var wrapper = document.getElementById('signup-wrapper');
 
@@ -389,27 +397,15 @@
       var btn = form.querySelector('button[type="submit"]');
       if(btn){ btn.textContent = 'Sending\u2026'; btn.disabled = true; }
 
-      // Submit via Netlify Function proxy (keeps API key server-side, fixes CORS)
-      fetch('/.netlify/functions/subscribe', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: email })
-      })
-      .then(function(res){
-        return res.json().then(function(data){ return { ok: res.ok, status: res.status, data: data }; });
-      })
-      .then(function(r){
-        if(r.ok || r.status === 409){
-          // 409 = already subscribed — show success anyway (no email enumeration)
-          showSuccess();
-        } else {
-          var msg = (r.data && r.data.error && r.data.error.message) || 'Something went wrong. Please try again.';
-          showError(msg);
-        }
-      })
-      .catch(function(){
-        showError('Something went wrong. Please try again.');
-      });
+      // Submit via hidden iframe — standard form POST, no CORS, no backend needed.
+      // EmailOctopus receives application/x-www-form-urlencoded; we show success
+      // when the iframe loads (or after a 6s safety timeout).
+      var iframe = document.getElementById('eo-hidden');
+      var done = false;
+      function onDone(){ if(done) return; done = true; showSuccess(); }
+      if(iframe){ iframe.onload = onDone; }
+      setTimeout(onDone, 6000);
+      form.submit(); // does NOT re-fire the submit listener
     });
   }
 })();
