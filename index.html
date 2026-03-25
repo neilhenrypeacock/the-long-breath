@@ -389,15 +389,11 @@
       var btn = form.querySelector('button[type="submit"]');
       if(btn){ btn.textContent = 'Sending\u2026'; btn.disabled = true; }
 
-      // Submit via EmailOctopus API — status PENDING triggers double opt-in email
-      fetch('https://emailoctopus.com/api/1.6/lists/165ad7d4-26b0-11f1-a551-6775dedd6e52/contacts', {
+      // Submit via Netlify Function proxy (keeps API key server-side, fixes CORS)
+      fetch('/.netlify/functions/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          api_key: 'eo_ac9bfbba9843fb0ceb60fc1b71fb5004fa085a9fc4cc10291fcf256abcfc91b3',
-          email_address: email,
-          status: 'PENDING'
-        })
+        body: JSON.stringify({ email: email })
       })
       .then(function(res){
         return res.json().then(function(data){ return { ok: res.ok, status: res.status, data: data }; });
